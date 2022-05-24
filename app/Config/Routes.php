@@ -34,6 +34,7 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 $routes->get('/user/sign-in', 'User::login');
 $routes->get('/user/sign-up', 'User::daftar');
+$routes->post('/user/insertAjax', 'User::insertAjax');
 $routes->get('/admin/sign-in', 'Admin::login');
 
 /*

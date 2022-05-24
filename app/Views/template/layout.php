@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="<?=base_url('md5/css/mdb.min.css')?>" />
     <link rel="stylesheet" href="<?=base_url('md5/css/admin.css')?>" />
     <link href="<?= base_url('datatables/datatables.min.css'); ?>" rel="stylesheet">
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -25,7 +25,6 @@
             <?= $this->renderSection('content')?>
         </div>
     </main>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
     <script src="<?= base_url('md5/js/mdb.min.js'); ?>" crossorigin="anonymous"></script>
     <script src="<?= base_url('md5/js/admin.js'); ?>" crossorigin="anonymous"></script>
     <script src="<?= base_url('datatables/datatables.min.js'); ?>"></script>
