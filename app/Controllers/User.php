@@ -11,15 +11,18 @@ class User extends BaseController
     {
         $this->memberModel = new Member();
     }
-    public function login(){
+    public function login()
+    {
         return view('/user/sign-in.php');
     }
 
-    public function daftar(){
+    public function daftar()
+    {
         return view('/user/sign-up.php');
     }
 
-    public function insertAjax(){
+    public function insertAjax()
+    {
         $validator = \Config\Services::validation();
         $valid = $this->validate([
             'namadepan' => [
@@ -58,7 +61,7 @@ class User extends BaseController
                 'errors' => ['mime_in' => 'Format {field} hanya jpg, jpeg, atau png', 'max_size' => 'Ukuran {field} maksimal 500 kb']
             ]
         ]);
-        if(!$valid){
+        if (!$valid) {
             $pesan = [
                 'error' => [
                     'namadepan' => $validator->getError('namadepan'),
@@ -70,13 +73,13 @@ class User extends BaseController
                 ]
             ];
             return $this->response->setJSON($pesan);
-        }else{
-            $nama = $this->request->getVar('namadepan'). " " . $this->request->getVar('namabelakang');
-            if($this->request->getFile('avatar')->getName() != ''){
+        } else {
+            $nama = $this->request->getVar('namadepan') . " " . $this->request->getVar('namabelakang');
+            if ($this->request->getFile('avatar')->getName() != '') {
                 $avatar = $this->request->getFile('avatar');
                 $namaAvatar = $avatar->getRandomName();
                 $avatar->move(ROOTPATH . 'public/images/avatar', $namaAvatar);
-            }else{
+            } else {
                 $namaAvatar = 'default.jpg';
             }
             $input = [
@@ -97,5 +100,52 @@ class User extends BaseController
             //redirect ke dashboard
             //user login kembali
         }
+    }
+
+    public function auth()
+    {
+        $email = $this->request->getVar('email');
+        $password = hash('sha256', $this->request->getVar('password'));
+
+        $data = $this->memberModel->where('email', $email)->first();
+        if ($data) {
+            if ($data['password'] == $password) {
+                session()->set([
+                    'id' => $data['id'],
+                    'nama' => $data['nama'],
+                    'email' => $data['email'],
+                    'status' => $data['status'],
+                    'avatar' => $data['avatar'],
+                    'logged_in' => TRUE
+                ]);
+                $pesan = [
+                    'sukses' => 'Login Sukses'
+                ];
+            } else {
+                $pesan = [
+                    'gagal' => 'Password Salah'
+                ];
+            }
+        } else {
+            $pesan = [
+                'gagal' => 'Email Belum Terdaftar'
+            ];
+        }
+        return $this->response->setJSON($pesan);
+    }
+
+    public function logout()
+    {
+        $session = session();
+        $session->destroy();
+        return redirect()->to('/');
+    }
+
+    public function detail($id){
+        $data = [
+            'item' => $this->memberModel->find($id)
+        ];
+
+        return view('user/profil', $data);
     }
 }

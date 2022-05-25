@@ -14,7 +14,7 @@
 
        <?php 
         //check udah login apa belom
-        if(isset($_SESSION['logged_in'])){ 
+        if(session()->get('logged_in')){ 
             ?>
              <!-- Right links -->
         <ul class="navbar-nav ms-auto d-flex flex-row">
@@ -36,11 +36,10 @@
             <!-- Avatar -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                    <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle" height="22" alt="" loading="lazy" />
+                    <img src="/images/avatar/<?= session()->get('avatar')?>" class="rounded-circle" height="22" alt="" loading="lazy" />
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                    <li><a class="dropdown-item" href="#">My profile</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><a class="dropdown-item" href="/user/<?= session()->get('id')?>">My profile</a></li>
                     <li><a class="dropdown-item" href="#">Logout</a></li>
                 </ul>
             </li>

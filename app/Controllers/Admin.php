@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 class Admin extends BaseController
 {
-    public function login(){
-        return view('/admin/sign-in.php');
+    public function index(){
+        return view('/admin/index.php');
     }
 }

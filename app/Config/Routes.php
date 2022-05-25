@@ -35,8 +35,11 @@ $routes->get('/', 'Home::index');
 $routes->get('/user/sign-in', 'User::login');
 $routes->get('/user/sign-up', 'User::daftar');
 $routes->post('/user/insertAjax', 'User::insertAjax');
-$routes->get('/admin/sign-in', 'Admin::login');
+$routes->post('/user/auth', 'User::auth');
+$routes->post('/user/log-out', 'User::logout');
+$routes->get('/admin', 'Admin::index');
 
+$routes->get('/user/(:segment)', 'User::detail/$1');
 /*
  * --------------------------------------------------------------------
  * Additional Routing
