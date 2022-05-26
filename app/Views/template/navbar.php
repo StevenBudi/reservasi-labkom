@@ -14,7 +14,6 @@
 
        <?php 
         //check udah login apa belom
-        print_r($_COOKIE);
         if(isset($_COOKIE['logged_in'])){ 
             ?>
              <!-- Right links -->
@@ -65,13 +64,14 @@
     </div>
     <!-- Container wrapper -->
 </nav>
+<div id="viewmodal" style="display: none;"></div>
 
 <script>
     $('#logout-button').click(function(e) {
         e.preventDefault();
         $.ajax({
             url : "<?= base_url('/user/logout-modal') ?>",
-            dataType : "json",
+            // dataType : "json",
             success : function(response){
                 $('#viewmodal').html(response.data).show();
                 $('#logout-modal').modal('show');

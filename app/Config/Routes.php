@@ -36,7 +36,8 @@ $routes->get('/user/sign-in', 'User::login');
 $routes->get('/user/sign-up', 'User::daftar');
 $routes->post('/user/insertAjax', 'User::insertAjax');
 $routes->post('/user/auth', 'User::auth');
-$routes->post('/user/log-out', 'User::logout');
+$routes->get('/user/logout-modal', 'User::logout_modal');
+$routes->get('/user/log-out', 'User::logout');
 $routes->get('/admin', 'Admin::index');
 
 $routes->get('/user/(:segment)', 'User::detail/$1');

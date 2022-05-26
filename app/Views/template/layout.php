@@ -23,7 +23,6 @@
     <main style="margin-top: 58px">
         <div class="container pt-4">
             <?= $this->renderSection('content')?>
-            <div class="viewmodal" style="display: none;"></div>
         </div>
     </main>
     <script src="<?= base_url('md5/js/mdb.min.js'); ?>" crossorigin="anonymous"></script>

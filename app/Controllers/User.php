@@ -118,9 +118,9 @@ class User extends BaseController
                     'status' => $data['status']
                 ]);
                 if ($this->request->getVar('check')) {
-                    setcookie('logged_in', true, time()+ 3600*24, '/', base_url(), TRUE);
-                }else{
-                    setcookie('logged_in', true, 0, '/', base_url(), TRUE);
+                    setcookie('logged_in', true, time() + 3600 * 24, '/', '', true);
+                } else {
+                    setcookie('logged_in', true, 0, '/', '', true);
                 }
                 $pesan = [
                     'sukses' => 'Login Sukses'
@@ -138,11 +138,25 @@ class User extends BaseController
         return $this->response->setJSON($pesan);
     }
 
+    public function logout_modal()
+    {
+        if($this->request->isAJAX()){
+            $result = [
+                'data' => view('/template/logout.php')
+            ];
+
+            return $this->response->setJSON($result);
+        }else{
+            exit('data tidak dapat ditampilkan');
+        }
+    }
+
     public function logout()
     {
-        $session = session();
-        $session->destroy();
-        return redirect()->to('/');
+        if ($this->request->isAJAX()) {
+            session()->destroy();
+            delete_cookie('logged_in', '', "/");
+        }
     }
 
     public function detail($id)
