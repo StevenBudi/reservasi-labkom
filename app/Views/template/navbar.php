@@ -14,7 +14,8 @@
 
        <?php 
         //check udah login apa belom
-        if(session()->get('logged_in')){ 
+        print_r($_COOKIE);
+        if(isset($_COOKIE['logged_in'])){ 
             ?>
              <!-- Right links -->
         <ul class="navbar-nav ms-auto d-flex flex-row">
@@ -40,7 +41,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                     <li><a class="dropdown-item" href="/user/<?= session()->get('id')?>">My profile</a></li>
-                    <li><a class="dropdown-item" href="#">Logout</a></li>
+                    <li><a class="dropdown-item" href="#" id="logout-button" data-toggle="modal" data-target="logout-modal">Logout</a></li>
                 </ul>
             </li>
         </ul>
@@ -64,3 +65,17 @@
     </div>
     <!-- Container wrapper -->
 </nav>
+
+<script>
+    $('#logout-button').click(function(e) {
+        e.preventDefault();
+        $.ajax({
+            url : "<?= base_url('/user/logout-modal') ?>",
+            dataType : "json",
+            success : function(response){
+                $('#viewmodal').html(response.data).show();
+                $('#logout-modal').modal('show');
+            }
+        })
+    })
+</script>

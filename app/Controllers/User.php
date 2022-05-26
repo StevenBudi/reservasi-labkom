@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\Member;
+use Config\Cookie;
+use DateTime;
 
 class User extends BaseController
 {
@@ -112,12 +114,14 @@ class User extends BaseController
             if ($data['password'] == $password) {
                 session()->set([
                     'id' => $data['id'],
-                    'nama' => $data['nama'],
-                    'email' => $data['email'],
-                    'status' => $data['status'],
                     'avatar' => $data['avatar'],
-                    'logged_in' => TRUE
+                    'status' => $data['status']
                 ]);
+                if ($this->request->getVar('check')) {
+                    setcookie('logged_in', true, time()+ 3600*24, '/', base_url(), TRUE);
+                }else{
+                    setcookie('logged_in', true, 0, '/', base_url(), TRUE);
+                }
                 $pesan = [
                     'sukses' => 'Login Sukses'
                 ];
@@ -141,7 +145,8 @@ class User extends BaseController
         return redirect()->to('/');
     }
 
-    public function detail($id){
+    public function detail($id)
+    {
         $data = [
             'item' => $this->memberModel->find($id)
         ];
