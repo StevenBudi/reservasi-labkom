@@ -31,9 +31,11 @@
                 url: $(this).attr('action'),
                 data: new FormData(this),
                 processData: false,
-                success: function() {
-                    $('#logout-modal').modal('hide');
-                    window.location.href = "<?= base_url("/") ?>";
+                success: function(response) {
+                    if (response.sukses) {
+                        $('#logout-modal').modal('hide');
+                        window.location.href = "/";
+                    }
                 }
             })
         })

@@ -140,22 +140,27 @@ class User extends BaseController
 
     public function logout_modal()
     {
-        if($this->request->isAJAX()){
+        if ($this->request->isAJAX()) {
             $result = [
                 'data' => view('/template/logout.php')
             ];
 
             return $this->response->setJSON($result);
-        }else{
+        } else {
             exit('data tidak dapat ditampilkan');
         }
     }
 
     public function logout()
     {
+        helper('cookie');
         if ($this->request->isAJAX()) {
             session()->destroy();
-            delete_cookie('logged_in', '', "/");
+            delete_cookie('logged_in');
+            $result = [
+                'sukses' => "Berhasil keluar"
+            ];
+            return $this->response->setJSON($result);
         }
     }
 
