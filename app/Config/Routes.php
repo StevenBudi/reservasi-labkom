@@ -39,6 +39,7 @@ $routes->post('/user/auth', 'User::auth');
 $routes->get('/user/logout-modal', 'User::logout_modal');
 $routes->get('/user/logout', 'User::logout');
 $routes->get('/admin', 'Admin::index');
+$routes->get('/about', 'About::index');
 
 $routes->get('/user/(:segment)', 'User::detail/$1');
 /*
