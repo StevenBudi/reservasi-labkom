@@ -84,12 +84,15 @@ class User extends BaseController
             } else {
                 $namaAvatar = 'default.jpg';
             }
+
+            $status = str_contains($this->request->getVar('email'), "uns.ac.id") ? "member_uns" : "member";
             $input = [
                 'nama' => $nama,
                 'email' => $this->request->getVar('email'),
                 'password' => hash('sha256', $this->request->getVar('password')),
                 'telepon' => $this->request->getVar('telepon'),
                 'alamat' => $this->request->getVar('alamat'),
+                'status' => $status,
                 'avatar' => $namaAvatar
             ];
 
