@@ -42,7 +42,8 @@ class Member extends Migration
 
             'status' => [
                 'type' => 'ENUM',
-                'constraint' => ['member_uns', 'member', 'admin']
+                'constraint' => ['member_uns', 'member', 'admin'],
+                'default' => 'member'
             ],
 
             'avatar' => [
