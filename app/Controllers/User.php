@@ -123,7 +123,7 @@ class User extends BaseController
                 if ($this->request->getVar('check')) {
                     setcookie('logged_in', true, time() + 3600 * 24, '/', '', true);
                 } else {
-                    setcookie('logged_in', true, 0, '/', '', true);
+                    setcookie('logged_in', true, time(), '/', '', true);
                 }
                 $pesan = [
                     'sukses' => 'Login Sukses'
