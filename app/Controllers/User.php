@@ -125,9 +125,9 @@ class User extends BaseController
                     setcookie('status', $data['status'], time() + 3600 * 24 * 365.25 * 1000, "/", '', true);
                     setcookie('avatar', $data['avatar'], time() + 3600 * 24 * 365.25 * 1000, "/", '', true);
                 } else {
-                    setcookie('logged_in', true, time(), '/', '', true);
-                    setcookie('status', $data['status'], time(), "/", '', true);
-                    setcookie('avatar', $data['avatar'], time(), "/", '', true);
+                    setcookie('logged_in', true, 0, '/', '', true);
+                    setcookie('status', $data['status'], 0, "/", '', true);
+                    setcookie('avatar', $data['avatar'], 0, "/", '', true);
                 }
                 $pesan = [
                     'sukses' => 'Login Sukses'
