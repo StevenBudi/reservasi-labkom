@@ -36,7 +36,7 @@
             <!-- Avatar -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                    <img src="/images/avatar/<?= session()->get('avatar')?>" class="rounded-circle" height="22" alt="" loading="lazy" />
+                    <img src="/images/avatar/<?= $_COOKIE['avatar']?>" class="rounded-circle" height="22" alt="" loading="lazy" />
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                     <li><a class="dropdown-item" href="/user/<?= session()->get('id')?>">My profile</a></li>

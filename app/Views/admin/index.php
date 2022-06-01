@@ -2,7 +2,7 @@
 
 <?= $this->section('content') ?>
 <?php
-    if(session()->get('status') == "admin"){
+    if(isset($_COOKIE['status']) && $_COOKIE['status'] == "admin"){
         ?>
         <h1>Admin</h1>
         <?php

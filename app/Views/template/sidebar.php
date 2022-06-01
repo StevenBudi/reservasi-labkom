@@ -9,7 +9,7 @@
                 <i class="fas fa-chart-area fa-fw me-3"></i><span>About</span>
             </a>
             <?php
-            if (session()->get('status') == "admin") {
+            if (isset($_COOKIE['status']) && $_COOKIE['status'] == "admin") {
             ?>
                 <a href="<?= base_url('/admin')?>" class="list-group-item list-group-item-action py-2 ripple <?= isset($path) && $path == 'admin' ? 'active' : ''?>">
                     <i class="fas fa-chart-area fa-fw me-3"></i><span>Admin Dashboard</span>
