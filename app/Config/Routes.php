@@ -41,8 +41,11 @@ $routes->get('/user/logout-modal', 'User::logout_modal');
 $routes->get('/user/logout', 'User::logout');
 $routes->get('/admin', 'Admin::index');
 $routes->get('/about', 'About::index');
-
+$routes->get('/user/edit/(:segment)', 'User::edit_modal/$1');
+$routes->get('/user/update/(:segment)', 'User::update/$1');
+$routes->get('/user/delete/(:segment)', 'User::delete/$1');
 $routes->get('/user/(:segment)', 'User::detail/$1');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
