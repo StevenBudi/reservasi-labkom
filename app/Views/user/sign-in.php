@@ -21,13 +21,20 @@ if (!isset($_COOKIE['logged_in'])) {
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 <?php
-}else{
-    ?>
+} else {
+?>
     <script>
-        alert("Already Logged In");
-        window.location.href = "/";
+        Swal.fire({
+            icon: 'warning',
+            title: 'Alert !',
+            text: 'Already Logged In',
+        }).then((result) => {
+            if (result.isConfirmed){
+                window.location.href = "/";
+            }
+        }) ;
     </script>
-    <?php
+<?php
 }
 ?>
 <script>
@@ -42,10 +49,21 @@ if (!isset($_COOKIE['logged_in'])) {
                 contentType: false,
                 success: function(response) {
                     if (response.gagal) {
-                        alert(response.gagal);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: response.gagal,
+                        });
                     } else {
-                        alert(response.sukses);
-                        window.location.href = "/";
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success !',
+                            text: response.sukses,
+                        }).then((result) => {
+                            if(result.isConfirmed){
+                                window.location.href = "/";
+                            }
+                        });
                     }
                 }
             })

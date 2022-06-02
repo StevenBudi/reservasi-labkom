@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="<?=base_url('md5/css/mdb.min.css')?>" />
     <link rel="stylesheet" href="<?=base_url('md5/css/admin.css')?>" />
     <link href="<?= base_url('datatables/datatables.min.css'); ?>" rel="stylesheet">
+    <link href="<?= base_url('node_modules/sweetalert2/dist/sweetalert2.css'); ?>" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <script src="<?= base_url('node_modules/sweetalert2/dist/sweetalert2.js'); ?>"></script>
 </head>
 
 <body>
