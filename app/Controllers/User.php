@@ -176,7 +176,6 @@ class User extends BaseController
         $data = [
             'item' => $this->memberModel->find($id)
         ];
-
         return view('user/profil', $data);
     }
 }
