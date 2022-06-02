@@ -110,8 +110,15 @@
                         }
 
                     } else {
-                        alert(response.sukses);
-                        window.location.href = "/user/sign-in"
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success !',
+                            text: response.sukses,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "/";
+                            }
+                        });
                     }
                 }
             })
