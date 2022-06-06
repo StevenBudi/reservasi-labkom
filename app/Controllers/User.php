@@ -252,4 +252,18 @@ class User extends BaseController
         ];
         return $this->response->setJSON($pesan);
     }
+
+    public function notVerif(){
+        if($this->request->isAJAX()){
+            $result = [
+                "list" => $this->memberModel->where('verif', 0)->findAll()
+            ];
+            $hasil = [
+                'data' => view('admin/list', $result)
+            ];
+            return $this->response->setJSON($hasil);
+        }else{
+            exit("Data tidak dapat ditampilkan");
+        }
+    }
 }

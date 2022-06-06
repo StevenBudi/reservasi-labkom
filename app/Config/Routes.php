@@ -2,6 +2,8 @@
 
 namespace Config;
 
+use App\Controllers\User;
+
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
@@ -43,6 +45,7 @@ $routes->get('/admin', 'Admin::index');
 $routes->get('/about', 'About::index');
 $routes->get('/user/edit/(:segment)', 'User::edit_modal/$1');
 $routes->get('/user/delete/(:segment)', 'User::delete/$1');
+$routes->get('/user/not-verif', "User::notVerif");
 $routes->get('/user/(:segment)', 'User::detail/$1');
 $routes->put('/user/update/(:segment)', 'User::update/$1');
 

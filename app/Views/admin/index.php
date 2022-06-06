@@ -5,6 +5,8 @@
 if (session()->get('status') == "admin") {
 ?>
     <h1>Admin</h1>
+    <h2>Data User Menunggu Verifikasi</h2>
+    <div id="unverif-user"></div>
 <?php
 } else {
 ?>
@@ -22,4 +24,19 @@ if (session()->get('status') == "admin") {
 <?php
 }
 ?>
+<script>
+    function unverifData(){
+        $.ajax({
+            url : "<?= base_url('/user/not-verif')?>",
+            dataType : "json",
+            success : (response) => {
+                $('#unverif-user').html(response.data)
+            }
+        })
+    }
+
+    $(document).ready(() => {
+        unverifData();
+    })
+</script>
 <?= $this->endSection() ?>
