@@ -6,7 +6,7 @@
 <?php
 if (isset($_COOKIE['logged_in'])) {
 ?>
-    <a href="#" class="btn btn-success" id="reser-button" data-target="reservation-modal" data-toggle="modal">Pesan Labkom</a>
+    <a href="#" class="btn <?= isset($_COOKIE['verif']) && $_COOKIE['verif'] == 1 ? "btn-success" : "disabled" ?>" id="reser-button" data-target="reservation-modal" data-toggle="modal">Pesan Labkom</a>
     <div id="reser-data" style="display: none;"></div>
     <div id="labkom-data"></div>
 <?php

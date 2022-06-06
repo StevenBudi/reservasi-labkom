@@ -99,7 +99,7 @@ class User extends BaseController
 
             $this->memberModel->save($input);
             $pesan = [
-                'sukses' => "Silahkan konfirmasi email terlebih dahulu sebelum login"
+                'sukses' => "Silahkan login dan tunggu proses verifikasi email dari admin"
             ];
             return $this->response->setJSON($pesan);
             //konfirmasi email
@@ -118,16 +118,15 @@ class User extends BaseController
             if ($data['password'] == $password) {
                 session()->set([
                     'id' => $data['id'],
-                    'avatar' => $data['avatar'],
                     'status' => $data['status']
                 ]);
                 if ($this->request->getVar('check')) {
                     setcookie('logged_in', true, time() + 3600 * 24 * 365.25 * 1000, '/', '', true);
-                    setcookie('status', $data['status'], time() + 3600 * 24 * 365.25 * 1000, "/", '', true);
+                    setcookie('verif', $data['verif'], time() + 3600 * 24 * 365.25 * 1000, "/", '', true);
                     setcookie('avatar', $data['avatar'], time() + 3600 * 24 * 365.25 * 1000, "/", '', true);
                 } else {
                     setcookie('logged_in', true, 0, '/', '', true);
-                    setcookie('status', $data['status'], 0, "/", '', true);
+                    setcookie('verif', $data['verif'], 0, "/", '', true);
                     setcookie('avatar', $data['avatar'], 0, "/", '', true);
                 }
                 $pesan = [
@@ -165,7 +164,7 @@ class User extends BaseController
             session()->destroy();
             delete_cookie('logged_in');
             delete_cookie('avatar');
-            delete_cookie('status');
+            delete_cookie('verif');
             $result = [
                 'sukses' => "Berhasil keluar"
             ];
