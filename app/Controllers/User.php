@@ -226,7 +226,7 @@ class User extends BaseController
             $avatar->move(ROOTPATH . 'public/images/avatar', $namaAvatar);
         } else {
             $namaAvatar = $this->request->getVar('avalama');
-        }   
+        }
 
         if ($this->request->getVar("password") !== null) {
             $password = hash('sha256', $this->request->getVar('password'));
@@ -253,8 +253,9 @@ class User extends BaseController
         return $this->response->setJSON($pesan);
     }
 
-    public function notVerif(){
-        if($this->request->isAJAX()){
+    public function notVerif()
+    {
+        if ($this->request->isAJAX()) {
             $result = [
                 "list" => $this->memberModel->where('verif', 0)->findAll()
             ];
@@ -262,8 +263,23 @@ class User extends BaseController
                 'data' => view('admin/list', $result)
             ];
             return $this->response->setJSON($hasil);
-        }else{
+        } else {
             exit("Data tidak dapat ditampilkan");
         }
+    }
+
+    public function verify($id)
+    {
+        // update verif column to 1
+        $input = [
+            'id' => $id,
+            'verif' => 1,
+        ];
+
+        $this->memberModel->save($input);
+        $pesan = [
+            'sukses' => 'Data Berhasil Diupdate'
+        ];
+        return $this->response->setJSON($pesan);
     }
 }

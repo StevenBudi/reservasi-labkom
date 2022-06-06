@@ -19,7 +19,7 @@
                         <td><?= $item['nama']?></td>
                         <td><?= $item['email']?></td>
                         <td><?= $item['telepon']?></td>
-                        <td><a href="<?= base_url('/user/verif/', $item['id'])?>" class="btn btn-warning">Verif</a></td>
+                        <td><a href="#" class="btn btn-warning" onclick="verifyUser(<?= $item['id']?>)">Verif</a></td>
                     </tr>
                     <?php
                 }
@@ -29,6 +29,16 @@
 </table>
 
 <script>
+    function verifyUser(id){
+        $.ajax({
+            url : "/user/verify/".concat(id.toString()),
+            success : function(response){
+                console.log(response);
+                unverifData();
+            }
+        })
+    }
+
     $(document).ready(() => {
         $("#datatable").DataTable();
     })
