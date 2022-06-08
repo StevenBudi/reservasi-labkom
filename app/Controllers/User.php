@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Member;
+use App\Models\MemberLog;
 use Config\Cookie;
 use DateTime;
 
@@ -13,6 +14,7 @@ class User extends BaseController
     {
         helper('cookie');
         $this->memberModel = new Member();
+        $this->memberLogModel = new MemberLog();
     }
     public function login()
     {
@@ -116,6 +118,12 @@ class User extends BaseController
         $data = $this->memberModel->where('email', $email)->first();
         if ($data) {
             if ($data['password'] == $password) {
+                $logData = [
+                    'user_id' => $data['id'],
+                    'action' => 'login',
+                    'ip' => strval($_SERVER['REMOTE_ADDR'])
+                ];
+                $this->memberLogModel->save($logData);
                 session()->set([
                     'id' => $data['id'],
                     'status' => $data['status']
@@ -161,6 +169,12 @@ class User extends BaseController
     public function logout()
     {
         if ($this->request->isAJAX()) {
+            $logData = [
+                'user_id' => session()->get('id'),
+                'action' => 'logout',
+                'ip' => strval($_SERVER['REMOTE_ADDR'])
+            ];
+            $this->memberLogModel->save($logData);
             session()->destroy();
             delete_cookie('logged_in');
             delete_cookie('avatar');
@@ -201,6 +215,12 @@ class User extends BaseController
     public function delete($id)
     {
         if ($this->request->isAJAX()) {
+            $logData = [
+                'user_id' => $id,
+                'action' => 'delete',
+                'ip' => strval($_SERVER['REMOTE_ADDR'])
+            ];
+            $this->memberLogModel->save($logData);
             $this->memberModel->delete($id);
             $result = [
                 'sukses' => 'Data Berhasil Dihapus'
@@ -247,6 +267,12 @@ class User extends BaseController
         ];
 
         $this->memberModel->save($input);
+        $logData = [
+            'user_id' => $id,
+            'action' => 'update',
+            'ip' => strval($_SERVER['REMOTE_ADDR'])
+        ];
+        $this->memberLogModel->save($logData);
         $pesan = [
             'sukses' => "Data telah diupdate"
         ];
@@ -260,7 +286,7 @@ class User extends BaseController
                 "list" => $this->memberModel->where('verif', 0)->findAll()
             ];
             $hasil = [
-                'data' => view('admin/list', $result)
+                'data' => view('admin/verif_list', $result)
             ];
             return $this->response->setJSON($hasil);
         } else {

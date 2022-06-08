@@ -47,6 +47,8 @@ $routes->get('/user/edit/(:segment)', 'User::edit_modal/$1');
 $routes->get('/user/delete/(:segment)', 'User::delete/$1');
 $routes->get('/user/verif/(:segment)', 'User::verify/$1');
 $routes->get('/user/not-verif', "User::notVerif");
+$routes->get('/admin/member_log', "Admin::member_log");
+$routes->get('/admin/export_member', 'Admin::export_member');
 $routes->get('/user/(:segment)', 'User::detail/$1');
 $routes->put('/user/update/(:segment)', 'User::update/$1');
 

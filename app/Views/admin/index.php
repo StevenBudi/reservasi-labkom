@@ -7,6 +7,9 @@ if (session()->get('status') == "admin") {
     <h1>Admin</h1>
     <h2>Data User Menunggu Verifikasi</h2>
     <div id="unverif-user"></div>
+
+    <h2>Member Log</h2>
+    <div id="member-log"></div>
 <?php
 } else {
 ?>
@@ -35,8 +38,19 @@ if (session()->get('status') == "admin") {
         })
     }
 
+    function memberLog(){
+        $.ajax({
+            url : "<?= base_url('/admin/member_log')?>",
+            dataType : "json",
+            success : (response) => {
+                $("#member-log").html(response.data)
+            }
+        })
+    }
+
     $(document).ready(() => {
         unverifData();
+        memberLog();
     })
 </script>
 <?= $this->endSection() ?>
