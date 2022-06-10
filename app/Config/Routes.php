@@ -52,6 +52,9 @@ $routes->get('/admin/member_log', "Admin::member_log");
 $routes->get('/admin/export_member', 'Admin::export_member');
 $routes->get('/user/(:segment)', 'User::detail/$1');
 $routes->put('/user/update/(:segment)', 'User::update/$1');
+$routes->put('/labkom/update/(:segment)', "Labkom::update/$1");
+$routes->get('/labkom/update_modal/(:segment)', "Labkom::update_modal/$1");
+
 
 
 /*
