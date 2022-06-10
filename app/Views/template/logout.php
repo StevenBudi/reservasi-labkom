@@ -10,7 +10,7 @@
             </div>
             <div class="modal-body">
                 <form action="<?= base_url('/user/logout') ?>" method="get" enctype="multipart/form-data" id="logout-form">
-                    <? csrf_field() ?>
+                    <?= csrf_field() ?>
                     <h1>Log out ?</h1>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Yes</button>
