@@ -248,13 +248,12 @@ class User extends BaseController
             $namaAvatar = $this->request->getVar('avalama');
         }
 
-        if ($this->request->getVar("password") !== null) {
+        if ($this->request->getVar("password") !== "") {
             $password = hash('sha256', $this->request->getVar('password'));
         } else {
             $password = $this->request->getVar("passlama");
         }
 
-        $status = str_contains($this->request->getVar('email'), "uns.ac.id") ? "member_uns" : "member";
         $input = [
             'id' => $id,
             'nama' => $nama,
@@ -262,7 +261,6 @@ class User extends BaseController
             'password' => $password,
             'telepon' => $this->request->getVar('telepon'),
             'alamat' => $this->request->getVar('alamat'),
-            'status' => $status,
             'avatar' => $namaAvatar
         ];
 
