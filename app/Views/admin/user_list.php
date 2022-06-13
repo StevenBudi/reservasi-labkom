@@ -1,4 +1,4 @@
-<table id="veriftable" class="table">
+<table id="usertable" class="table">
     <thead>
         <tr>
             <th>No</th>
@@ -40,6 +40,6 @@
     }
 
     $(document).ready(() => {
-        $("#veriftable").DataTable();
+        $("#usertable").DataTable();
     })
 </script>
