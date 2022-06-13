@@ -284,7 +284,7 @@ class User extends BaseController
                 "list" => $this->memberModel->where('verif', 0)->findAll()
             ];
             $hasil = [
-                'data' => view('admin/verif_list', $result)
+                'data' => view('admin/user_list', $result)
             ];
             return $this->response->setJSON($hasil);
         } else {
