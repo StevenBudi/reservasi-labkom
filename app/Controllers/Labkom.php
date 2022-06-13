@@ -65,15 +65,29 @@ class Labkom extends BaseController
         return $this->response->setJSON($pesan);
     }
 
+    public function jadwal_labkom(){
+        if($this->request->isAJAX()){
+            $result = [
+                'list' => $this->reservasi->where('status', 'unfinished')->findAll()
+            ];
+            $hasil = [
+                'data' => view('/template/schedule', $result)
+            ];
+
+            return $this->response->setJSON($hasil);
+        }else{
+            exit("Data tidak dapat ditampilkan");
+        }
+    }
+
     public function reserve()
     {
         $userData = $this->memberModel->find(session()->get('id'));
         $waktu_pinjam = $this->request->getVar('peminjaman') ." " .$this->request->getVar('jam'); 
         $waktu_pinjam = date('Y-m-d H:i:s', strtotime($waktu_pinjam));
-
         $waktu_selesai = date('Y-m-d H:i:s', strtotime($waktu_pinjam . sprintf(' + %u hour', $this->request->getVar('duration'))) );
         $input = [
-            'peminjam' => $userData[0]['nama'],
+            'peminjam' => $userData['nama'],
             'labkom' => $this->request->getVar('labkom-opt'),
             'waktu_peminjaman' => date('Y-m-d h:i:s', time()),
             'waktu_penggunaan' => $waktu_pinjam,
@@ -81,10 +95,8 @@ class Labkom extends BaseController
             'status' => 'unfinished',
             'catatan' => $this->request->getVar('reser-notes')
         ];
-        print_r($input);
         $db = db_connect();
-        $query = $db->query('SELECT * FROM reservasi_labkom WHERE `peminjam` = \'' .$userData[0]['nama'].'\'AND'.'`labkom` = \''. $this->request->getVar('labkom-opt').'\' AND waktu_penggunaan >= \'' . $waktu_pinjam . '\' AND waktu_akhir_penggunaan <= \'' . $waktu_selesai . '\'');
-        print_r($query->getResult());
+        $query = $db->query('SELECT * FROM reservasi_labkom WHERE `labkom` = \''. $this->request->getVar('labkom-opt').'\' AND `waktu_penggunaan` >= \'' . $waktu_pinjam . '\' OR `waktu_akhir_penggunaan` <= \'' . $waktu_selesai . '\'');
         if (count($query->getResult()) == 0) {
             $this->reservasi->save($input);
             $pesan = [
