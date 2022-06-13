@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="<?= base_url('') ?>" method="POST" enctype="multipart/form-data" id="logout-form">
+                <form action="<?= base_url('/labkom/pesan') ?>" method="POST" enctype="multipart/form-data" id="logout-form">
                     <? csrf_field() ?>
                     <div class="mb-3">
                         <label for="labkom-opt">Laboratorium Komputer</label>
