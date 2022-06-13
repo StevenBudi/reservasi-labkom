@@ -32,10 +32,8 @@
                 data: new FormData(this),
                 processData: false,
                 success: function(response) {
-                    if (response.sukses) {
-                        $('#logout-modal').modal('hide');
-                        window.location.href = "/";
-                    }
+                    $('#logout-modal').modal('hide');
+                    window.location.href = "/";
                 }
             })
         })
