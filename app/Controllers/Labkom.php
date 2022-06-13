@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\Labkom as ModelsLabkom;
 use App\Models\Member;
+use App\Models\ReservasiLabkom;
 
 class Labkom extends BaseController
 {
@@ -13,6 +14,7 @@ class Labkom extends BaseController
     {
         $this->labkomModel = new ModelsLabkom();
         $this->memberModel = new Member();
+        $this->reservasi = new ReservasiLabkom();
     }
     public function index()
     {
@@ -66,36 +68,33 @@ class Labkom extends BaseController
     public function reserve()
     {
         $userData = $this->memberModel->find(session()->get('id'));
-        
         $waktu_pinjam = $this->request->getVar('peminjaman') ." " .$this->request->getVar('jam'); 
         $waktu_pinjam = date('Y-m-d H:i:s', strtotime($waktu_pinjam));
 
-        $waktu_selesai = $this->request->getVar('peminjaman') . " " . $this->request->getVar('jam') + $this->request->getVar('duration');
-        $waktu_selesai = date('Y-m-d H:i:s', strtotime($waktu_selesai));
-
+        $waktu_selesai = date('Y-m-d H:i:s', strtotime($waktu_pinjam . sprintf(' + %u hour', $this->request->getVar('duration'))) );
         $input = [
-            'peminjam' => $userData['nama'],
+            'peminjam' => $userData[0]['nama'],
             'labkom' => $this->request->getVar('labkom-opt'),
-            'waktu_peminjaman' => date('m/d/Y h:i:s', time()),
+            'waktu_peminjaman' => date('Y-m-d h:i:s', time()),
             'waktu_penggunaan' => $waktu_pinjam,
             'waktu_akhir_penggunaan' => $waktu_selesai,
             'status' => 'unfinished',
             'catatan' => $this->request->getVar('reser-notes')
         ];
-
+        print_r($input);
         $db = db_connect();
-        $query = $db->query('SELECT * FROM reservasi_labkom WHERE status == `unfinished` AND waktu_penggunaan <=' . $waktu_pinjam . ' AND waktu_akhir_penggunaan >= ' . $waktu_selesai);
-        // Check hasil query ada atau tidak
-        if (!empty($query)) {
-            $this->labkomModel->save($input);
-            $result = [
-                'pesan' => 'Berhasil Reservasi'
+        $query = $db->query('SELECT * FROM reservasi_labkom WHERE `peminjam` = \'' .$userData[0]['nama'].'\'AND'.'`labkom` = \''. $this->request->getVar('labkom-opt').'\' AND waktu_penggunaan >= \'' . $waktu_pinjam . '\' AND waktu_akhir_penggunaan <= \'' . $waktu_selesai . '\'');
+        print_r($query->getResult());
+        if (count($query->getResult()) == 0) {
+            $this->reservasi->save($input);
+            $pesan = [
+                'sukses' => 'Berhasil Reservasi'
             ];
         }else{
-            $result = [
-                'pesan' => 'Waktu anda bertabrakan'
+            $pesan = [
+                'gagal' => 'Waktu anda bertabrakan dengan jadwal lain'
             ];
         }
-        return $this->response->setJSON($result);
+        return $this->response->setJSON($pesan);
     }
 }
