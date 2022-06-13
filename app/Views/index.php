@@ -24,5 +24,19 @@ if (isset($_COOKIE['logged_in'])) {
             }
         })
     })
+
+    function jadwalLabkom() {
+        $.ajax({
+            url: "<?= base_url('/labkom/jadwal') ?>",
+            dataType: "json",
+            success: (response) => {
+                $("#labkom-data").html(response.data)
+            }
+        })
+    }
+
+    $(document).ready(() => {
+        jadwalLabkom();
+    })
 </script>
 <?= $this->endSection() ?>

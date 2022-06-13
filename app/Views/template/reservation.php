@@ -58,8 +58,26 @@
             data: new FormData(this),
             processData: false,
             contentType: false,
-            success : function(response){
-                
+            success: function(response) {
+                if (response.sukses) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success !',
+                        text: response.sukses,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "/";
+                        }
+                    });
+                    $('#reservation-modal').modal('hide')
+                    jadwalLabkom();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: response.gagal,
+                    });
+                }
             }
         })
     });
