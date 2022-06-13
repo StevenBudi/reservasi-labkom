@@ -30,7 +30,7 @@
 
                     <div class="mb-3">
                         <label for="labkom-papan" class="form-label">Jumlah Papan Tulis</label>
-                        <input type="number" name="labkom-papan" id="labkom-papan" value="<?= $item['papan tulis'] ?>">
+                        <input type="number" name="labkom-papan" id="labkom-papan" value="<?= $item['papan_tulis'] ?>">
                     </div>
 
                     <div class="mb-3">
@@ -41,7 +41,7 @@
 
                     <div class="mb-3">
                         <label for="labkom-vga" class="form-label">Jumlah Adaptor VGA</label>
-                        <input type="number" name="labkom-vga" id="labkom-vga" value="<?= $item['kabel VGA'] ?>">
+                        <input type="number" name="labkom-vga" id="labkom-vga" value="<?= $item['kabel_VGA'] ?>">
                     </div>
 
                     <div class="mb-3">

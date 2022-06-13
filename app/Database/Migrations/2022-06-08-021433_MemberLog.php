@@ -36,6 +36,6 @@ class MemberLog extends Migration
 
     public function down()
     {
-        //
+        $this->forge->dropTable("member_log");
     }
 }

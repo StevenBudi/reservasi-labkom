@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Labkom extends Migration
+class ReservasiLabkom extends Migration
 {
     public function up()
     {
@@ -15,43 +15,39 @@ class Labkom extends Migration
                 'unsigned' => true,
                 'auto_increment' => true,
             ],
-            'labkom' => [
+            'peminjam' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255
             ],
-            'pc' => [
-                'type' => 'INT',
-                'constraint' => 5
+            'labkom' => [
+                'type' => 'ENUM',
+                'constraint' => ['rpl', 'mulmed', 'tkj']
             ],
-            'meja' => [
-                'type' => 'INT',
-                'constraint' => 5
+            'waktu_peminjaman' => [
+                'type' => 'DATETIME'
             ],
-            'kursi' => [
-                'type' => 'INT',
-                'constraint' => 5
+            'waktu_penggunaan' => [
+                'type' => 'DATETIME'
             ],
-            'papan_tulis' => [
-                'type' => 'INT',
-                'constraint' => 5
+            'waktu_akhir_penggunaan' => [
+                'type' => 'DATETIME'
             ],
-            'penghapus' => [
-                'type' => 'INT',
-                'constraint' => 5
+            'status' => [
+                'type' => 'ENUM',
+                'constraint' => ['finished', 'unfinished']
             ],
-            'kabel_VGA' => [
-                'type' => 'INT',
-                'constraint' => 5
+            'catatan' => [
+                'type' => 'TEXT'
             ],
             'created_at datetime default current_timestamp',
             'updated_at datetime default current_timestamp on update current_timestamp'
         ]);
         $this->forge->addPrimaryKey('id', true);
-        $this->forge->createTable('laboratorium');
+        $this->forge->createTable('reservasi_labkom');
     }
 
     public function down()
     {
-        $this->forge->dropTable("laboratorium");
+        $this->forge->dropTable("reservasi_labkom");
     }
 }
