@@ -8,10 +8,11 @@ if (isset($_COOKIE['logged_in'])) {
 ?>
     <a href="#" class="btn <?= isset($_COOKIE['verif']) && $_COOKIE['verif'] == 1 ? "btn-success" : "disabled" ?>" id="reser-button" data-target="reservation-modal" data-toggle="modal">Pesan Labkom</a>
     <div id="reser-data" style="display: none;"></div>
-    <div id="labkom-data"></div>
+    <div id="reser-update" style="display: none;"></div>
 <?php
 }
 ?>
+<div id="labkom-data"></div>
 <script>
     $('#reser-button').click(function(e) {
         e.preventDefault();
@@ -23,20 +24,6 @@ if (isset($_COOKIE['logged_in'])) {
                 $('#reservation-modal').modal('show');
             }
         })
-    })
-
-    function jadwalLabkom() {
-        $.ajax({
-            url: "<?= base_url('/labkom/jadwal') ?>",
-            dataType: "json",
-            success: (response) => {
-                $("#labkom-data").html(response.data)
-            }
-        })
-    }
-
-    $(document).ready(() => {
-        jadwalLabkom();
     })
 </script>
 <?= $this->endSection() ?>

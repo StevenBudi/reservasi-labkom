@@ -45,6 +45,20 @@
                 console.error();
             }
         }
+
+        function jadwalLabkom() {
+            $.ajax({
+                url: "<?= base_url('/labkom/jadwal') ?>",
+                dataType: "json",
+                success: (response) => {
+                    $("#labkom-data").html(response.data)
+                }
+            })
+        }
+
+        $(document).ready(() => {
+            jadwalLabkom();
+        })
     </script>
 </body>
 

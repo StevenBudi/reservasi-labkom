@@ -65,8 +65,9 @@ class Labkom extends BaseController
         return $this->response->setJSON($pesan);
     }
 
-    public function jadwal_labkom(){
-        if($this->request->isAJAX()){
+    public function jadwal_labkom()
+    {
+        if ($this->request->isAJAX()) {
             $result = [
                 'list' => $this->reservasi->where('status', 'unfinished')->findAll()
             ];
@@ -75,7 +76,7 @@ class Labkom extends BaseController
             ];
 
             return $this->response->setJSON($hasil);
-        }else{
+        } else {
             exit("Data tidak dapat ditampilkan");
         }
     }
@@ -83,9 +84,9 @@ class Labkom extends BaseController
     public function reserve()
     {
         $userData = $this->memberModel->find(session()->get('id'));
-        $waktu_pinjam = $this->request->getVar('peminjaman') ." " .$this->request->getVar('jam'); 
+        $waktu_pinjam = $this->request->getVar('peminjaman') . " " . $this->request->getVar('jam');
         $waktu_pinjam = date('Y-m-d H:i:s', strtotime($waktu_pinjam));
-        $waktu_selesai = date('Y-m-d H:i:s', strtotime($waktu_pinjam . sprintf(' + %u hour', $this->request->getVar('duration'))) );
+        $waktu_selesai = date('Y-m-d H:i:s', strtotime($waktu_pinjam . sprintf(' + %u hour', $this->request->getVar('duration'))));
         $input = [
             'peminjam' => $userData['nama'],
             'labkom' => $this->request->getVar('labkom-opt'),
@@ -96,13 +97,79 @@ class Labkom extends BaseController
             'catatan' => $this->request->getVar('reser-notes')
         ];
         $db = db_connect();
-        $query = $db->query('SELECT * FROM reservasi_labkom WHERE `labkom` = \''. $this->request->getVar('labkom-opt').'\' AND `waktu_penggunaan` >= \'' . $waktu_pinjam . '\' OR `waktu_akhir_penggunaan` <= \'' . $waktu_selesai . '\'');
+        $query = $db->query('SELECT * FROM reservasi_labkom WHERE `labkom` = \'' . $this->request->getVar('labkom-opt') . '\' AND `waktu_penggunaan` >= \'' . $waktu_pinjam . '\' OR `waktu_akhir_penggunaan` <= \'' . $waktu_selesai . '\' AND `status` = \'unfinished\'');
         if (count($query->getResult()) == 0) {
             $this->reservasi->save($input);
             $pesan = [
                 'sukses' => 'Berhasil Reservasi'
             ];
-        }else{
+        } else {
+            $pesan = [
+                'gagal' => 'Waktu anda bertabrakan dengan jadwal lain'
+            ];
+        }
+        return $this->response->setJSON($pesan);
+    }
+
+    public function delete_reser($id)
+    {
+        if ($this->request->isAJAX()) {
+            $input = [
+                'id' => $id,
+                'status' => 'finished'
+            ];
+
+            $pesan = [
+                'sukses' => 'Data Berhasil Dihapus'
+            ];
+            $this->reservasi->save($input);
+            return $this->response->setJSON($pesan);
+        } else {
+            exit("Gagal menghapus data");
+        }
+    }
+
+    public function update_reser_modal($id)
+    {
+        if ($this->request->isAJAX()) {
+            $data = [
+                'item' => $this->reservasi->find($id)
+            ];
+
+            $result = [
+                'data' => view('/template/reser_modal.php', $data)
+            ];
+
+            return $this->response->setJSON($result);
+        } else {
+            exit('data tidak dapat ditampilkan');
+        }
+    }
+
+    public function update_reser($id)
+    {
+        $userData = $this->memberModel->find(session()->get('id'));
+        $waktu_pinjam = $this->request->getVar('peminjaman') . " " . $this->request->getVar('jam');
+        $waktu_pinjam = date('Y-m-d H:i:s', strtotime($waktu_pinjam));
+        $waktu_selesai = date('Y-m-d H:i:s', strtotime($waktu_pinjam . sprintf(' + %u hour', $this->request->getVar('duration'))));
+        $input = [
+            'id' => $id,
+            'peminjam' => $userData['nama'],
+            'labkom' => $this->request->getVar('labkom-opt'),
+            'waktu_peminjaman' => date('Y-m-d h:i:s', time()),
+            'waktu_penggunaan' => $waktu_pinjam,
+            'waktu_akhir_penggunaan' => $waktu_selesai,
+            'status' => 'unfinished',
+            'catatan' => $this->request->getVar('reser-notes')
+        ];
+        $db = db_connect();
+        $query = $db->query('SELECT * FROM reservasi_labkom WHERE `labkom` = \'' . $this->request->getVar('labkom-opt') . '\' AND `waktu_penggunaan` >= \'' . $waktu_pinjam . '\' OR `waktu_akhir_penggunaan` <= \'' . $waktu_selesai . '\' AND `status` = \'unfinished\'');
+        if (count($query->getResult()) == 1) {
+            $this->reservasi->save($input);
+            $pesan = [
+                'sukses' => 'Data berhasil diupdate'
+            ];
+        } else {
             $pesan = [
                 'gagal' => 'Waktu anda bertabrakan dengan jadwal lain'
             ];
