@@ -5,12 +5,14 @@ namespace App\Controllers;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use App\Models\MemberLog;
+use App\Models\ReservasiLabkom;
 
 class Admin extends BaseController
 {
     public function __construct()
     {
         $this->memberLogModel = new MemberLog();
+        $this->reservasi = new ReservasiLabkom();
     }
     public function index()
     {
@@ -62,7 +64,44 @@ class Admin extends BaseController
         }
 
         $writer = new Xlsx($spreadsheet);
-        $filename = date('Y-m-d-His') . 'Member Log';
+        $filename = date('Y-m-d-His') . '- Member Log';
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename=' . $filename . '.xlsx');
+        header('Cache-Control: max-age=0');
+
+        $writer->save('php://output');
+        die;
+    }
+
+    public function export_schedule()
+    {
+        $data = $this->reservasi->findAll();
+        $spreadsheet = new Spreadsheet();
+
+        $spreadsheet->setActiveSheetIndex(0)
+            ->setCellValue('A1', 'No')
+            ->setCellValue('B1', 'Peminjam')
+            ->setCellValue('C1', 'Waktu Peminjaman')
+            ->setCellValue('D1', 'Waktu Penggunaan')
+            ->setCellValue('E1', 'Waktu Akhir Penggunaan')
+            ->setCellValue('F1', 'Catatan');
+
+        $column = 2;
+        foreach ($data as $item) {
+            $spreadsheet->setActiveSheetIndex(0)
+                ->setCellValue('A' . $column, $column - 1)
+                ->setCellValue('B' . $column, $item['peminjam'])
+                ->setCellValue('C' . $column, $item['waktu_peminjaman'])
+                ->setCellValue('D' . $column, $item['waktu_penggunaan'])
+                ->setCellValue('E' . $column, $item['waktu_akhir_penggunaan'])
+                ->setCellValue('F' . $column, $item['catatan']);
+
+            $column++;
+        }
+
+        $writer = new Xlsx($spreadsheet);
+        $filename = date('Y-m-d-His') . '- Reservasi Log';
 
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment;filename=' . $filename . '.xlsx');

@@ -56,8 +56,10 @@ $routes->put('/labkom/update/(:segment)', "Labkom::update/$1");
 $routes->get('/labkom/update_modal/(:segment)', "Labkom::update_modal/$1");
 $routes->post('/labkom/pesan', 'Labkom::reserve');
 $routes->get('/labkom/jadwal', 'Labkom::jadwal_labkom');
-
-
+$routes->get('labkom/delete_reser/(:segment)', 'Labkom::delete_reser/$1');
+$routes->get('labkom/update_reser_modal/(:segment)', 'Labkom::update_reser_modal/$1');
+$routes->put('labkom/update_reser/(:segment)', 'Labkom::update_reser/$1');
+$routes->get('/admin/export_schedule', 'Admin::export_schedule');
 
 /*
  * --------------------------------------------------------------------
