@@ -11,10 +11,10 @@
             <div class="modal-body">
                 <form action="<?= base_url('/user/logout') ?>" method="get" enctype="multipart/form-data" id="logout-form">
                     <?= csrf_field() ?>
-                    <h1>Log out ?</h1>
+                    <strong>Apakah Anda Yakin Untuk Log Out ...?</strong>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Yes</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-outline-primary">Yes</button>
+                        <button type="button" class="btn  btn-outline-secondary" data-dismiss="modal">Cancel</button>
                     </div>
                 </form>
             </div>

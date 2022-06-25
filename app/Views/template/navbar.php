@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+<nav id="main-navbar" class="navbar navbar-expand-lg navbar-light  fixed-top">
     <!-- Container wrapper -->
     <div class="container-fluid">
         <!-- Toggle button -->
@@ -8,8 +8,8 @@
         </button>
 
         <!-- Brand -->
-        <a class="navbar-brand" href="#">
-            <img src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png" height="25" alt="" loading="lazy" />
+        <a class="navbar-brand" href="<?= base_url('/')?>">
+            <img src="<?= base_url('images/home.png')?>" height="25" alt="" loading="lazy" />
         </a>
 
        <?php 
@@ -17,7 +17,7 @@
         if(isset($_COOKIE['logged_in'])){ 
             ?>
              <!-- Right links -->
-        <ul class="navbar-nav ms-auto d-flex flex-row">
+        <ul  class="navbar-nav ms-auto d-flex flex-row" >
             <!-- Notification dropdown -->
             <li class="nav-item dropdown">
                 <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
@@ -50,11 +50,10 @@
             ?>
             <ul class="navbar-nav ms-auto d-flex flex-row">
                 <li class="nav-item">
-                    <a href="/user/sign-up">Sign Up</a>
+                    <a type="button" class="btn btn-outline-primary mx-1" href="/user/sign-up" role="button">Sign Up</a>
                 </li>
-
                 <li class="nav-item">
-                    <a href="/user/sign-in">Sign In</a>
+                    <a type="button" class="btn btn-outline-light mx-1" href="/user/sign-in" role="button">Sign In</a>
                 </li>
             </ul>
             <?php

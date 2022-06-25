@@ -1,4 +1,4 @@
-<a href="<?= base_url('/admin/export_member')?>" class="btn btn-success">Download Data</a>
+<a href="<?= base_url('/admin/export_member')?>" class="btn  btn-outline-success mb-3 mt-3 mx-auuto">Download Data</a>
 <table id="membertable" class="table">
     <thead>
         <tr>

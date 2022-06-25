@@ -5,11 +5,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Labkom</title>
+    
+    <link rel="icon"  href="<?= base_url('images/logo_title.png') ?>" type="image/icon">
+    <title>Labkom PTIK</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
     <link rel="stylesheet" href="<?= base_url('md5/css/mdb.min.css') ?>" />
     <link rel="stylesheet" href="<?= base_url('md5/css/admin.css') ?>" />
+    <link rel = "stylesheet" type = "text/css" href="<?= base_url('/main.css') ?>" >
     <link href="<?= base_url('datatables/datatables.min.css'); ?>" rel="stylesheet">
     <link href="<?= base_url('node_modules/sweetalert2/dist/sweetalert2.css'); ?>" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
@@ -27,6 +30,7 @@
             <?= $this->renderSection('content') ?>
         </div>
     </main>
+    <?= $this->include('template/footer.php') ?>
     <script src="<?= base_url('md5/js/mdb.min.js'); ?>" crossorigin="anonymous"></script>
     <script src="<?= base_url('md5/js/admin.js'); ?>" crossorigin="anonymous"></script>
     <script src="<?= base_url('datatables/datatables.min.js'); ?>"></script>

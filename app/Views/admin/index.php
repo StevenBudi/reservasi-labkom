@@ -4,43 +4,61 @@
 <?php
 if (session()->get('status') == "admin") {
 ?>
-    <h1>Admin</h1>
-    <h2>Data User Menunggu Verifikasi</h2>
-    <div id="unverif-user"></div>
-
-    <h2>Member Log</h2>
-    <div id="member-log"></div>
-
-    <h2>Managemen Fasilitas Laboratorium</h2>
-    <div>
-        <table>
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Nama</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Software Engineering</td>
-                    <td><a href="#" class="btn" id="facility-button-1" data-target="facility-modal" data-toggle="modal">Edit</a></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Multimedia Studio</td>
-                    <td><a href="#" class="btn" id="facility-button-2" data-target="facility-modal" data-toggle="modal">Edit</a></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Computer Network and Instrumentation</td>
-                    <td><a href="#" class="btn" id="facility-button-3" data-target="facility-modal" data-toggle="modal">Edit</a></td>
-                </tr>
-            </tbody>
-        </table>
+<div class="card data shadow ">
+    <div class="card-header ">
+        <h5 class="text-center"><strong>Data User Menunggu Verifikasi</strong></h5>
     </div>
-    <div id="facility-edit" style="display: hidden;"></div>
+    <div id="unverif-user"></div>
+</div>
+
+<div class="card data shadow">
+<div class="card-header ">
+        <h5 class="text-center"><strong>Data Member Log</strong></h5>
+    </div>
+    <div id="member-log"></div>
+</div>
+
+<div class="card data shadow">
+<div class="card-header ">
+        <h5 class="text-center"><strong>Management Data Fasilitas Laboratorium</strong></h5>
+    </div>
+<div class="row mb-2 mt-2">
+    <div class="col-2">
+      Laboratorium
+    </div>
+    <div class="col-8">
+    Software Engineering
+    </div>
+    <div class="col-2">
+    <button class="btn btn-outline-success btn-circle" id="facility-button-1" data-target="facility-modal" data-toggle="modal" ><i class="fas fa-pencil-alt" ></i></button>
+    </div>
+  </div>
+<div class="row mb-2 mt-2">
+    <div class="col-2">
+      Laboratorium
+    </div>
+    <div class="col-8">
+    Multimedia Studio
+    </div>
+    <div class="col-2">
+    <button class="btn btn-outline-success btn-circle" id="facility-button-2" data-target="facility-modal" data-toggle="modal" ><i class="fas fa-pencil-alt" ></i></button>
+    </div>
+  </div>
+<div class="row mb-2 mt-2">
+    <div class="col-2">
+      Laboratorium
+    </div>
+    <div class="col-8">
+    Computer Network and Instrumentation
+    </div>
+    <div class="col-2">
+    <button class="btn btn-outline-success btn-circle " id="facility-button-3" data-target="facility-modal" data-toggle="modal" ><i class="fas fa-pencil-alt" ></i></button>
+    </div>
+  </div>
+</div>
+<div>
+       <div id="facility-edit" style="display: hidden;"></div>
+</div>
 <?php
 } else {
 ?>
