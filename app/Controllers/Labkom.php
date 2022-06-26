@@ -113,20 +113,15 @@ class Labkom extends BaseController
 
     public function delete_reser($id)
     {
-        if ($this->request->isAJAX()) {
-            $input = [
-                'id' => $id,
-                'status' => 'finished'
-            ];
-
-            $pesan = [
-                'sukses' => 'Data Berhasil Dihapus'
-            ];
-            $this->reservasi->save($input);
-            return $this->response->setJSON($pesan);
-        } else {
-            exit("Gagal menghapus data");
-        }
+        $input = [
+            'id' => $id,
+            'status' => 'finished'
+        ];
+        $this->reservasi->save($input);
+        $pesan = [
+            'sukses' => 'Data Berhasil Dihapus'
+        ];
+        return $this->response->setJSON($pesan);
     }
 
     public function update_reser_modal($id)
@@ -148,13 +143,11 @@ class Labkom extends BaseController
 
     public function update_reser($id)
     {
-        $userData = $this->memberModel->find(session()->get('id'));
         $waktu_pinjam = $this->request->getVar('peminjaman') . " " . $this->request->getVar('jam');
         $waktu_pinjam = date('Y-m-d H:i:s', strtotime($waktu_pinjam));
         $waktu_selesai = date('Y-m-d H:i:s', strtotime($waktu_pinjam . sprintf(' + %u hour', $this->request->getVar('duration'))));
         $input = [
             'id' => $id,
-            'peminjam' => $userData['nama'],
             'labkom' => $this->request->getVar('labkom-opt'),
             'waktu_peminjaman' => date('Y-m-d h:i:s', time()),
             'waktu_penggunaan' => $waktu_pinjam,

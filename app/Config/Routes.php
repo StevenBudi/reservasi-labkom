@@ -34,33 +34,39 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
-$routes->get('/labkom', "Labkom::index");
 $routes->get('/reservation', 'Home::reservation');
+$routes->get('/labkom', "Labkom::index");
+$routes->get('/about', 'About::index');
+
+// Admin Routes
+$routes->get('/admin', 'Admin::index');
+$routes->get('/admin/export_schedule', 'Admin::export_schedule');
+$routes->get('/admin/member_log', "Admin::member_log");
+$routes->get('/admin/export_member', 'Admin::export_member');
+$routes->get('/admin/user_management', 'Admin::user_manager');
+
+// User Routes
 $routes->get('/user/sign-in', 'User::login');
 $routes->get('/user/sign-up', 'User::daftar');
 $routes->post('/user/insertAjax', 'User::insertAjax');
 $routes->post('/user/auth', 'User::auth');
 $routes->get('/user/logout-modal', 'User::logout_modal');
 $routes->get('/user/logout', 'User::logout');
-$routes->get('/admin', 'Admin::index');
-$routes->get('/about', 'About::index');
 $routes->get('/user/edit/(:segment)', 'User::edit_modal/$1');
-$routes->get('/user/delete/(:segment)', 'User::delete/$1');
+$routes->delete('/user/delete/(:segment)', 'User::delete/$1');
 $routes->get('/user/verif/(:segment)', 'User::verify/$1');
 $routes->get('/user/not-verif', "User::notVerif");
-$routes->get('/admin/member_log', "Admin::member_log");
-$routes->get('/admin/export_member', 'Admin::export_member');
 $routes->get('/user/(:segment)', 'User::detail/$1');
 $routes->put('/user/update/(:segment)', 'User::update/$1');
+
+// Labkom Routes
 $routes->put('/labkom/update/(:segment)', "Labkom::update/$1");
 $routes->get('/labkom/update_modal/(:segment)', "Labkom::update_modal/$1");
 $routes->post('/labkom/pesan', 'Labkom::reserve');
 $routes->get('/labkom/jadwal', 'Labkom::jadwal_labkom');
-$routes->get('labkom/delete_reser/(:segment)', 'Labkom::delete_reser/$1');
+$routes->delete('labkom/delete_reser/(:segment)', 'Labkom::delete_reser/$1');
 $routes->get('labkom/update_reser_modal/(:segment)', 'Labkom::update_reser_modal/$1');
 $routes->put('labkom/update_reser/(:segment)', 'Labkom::update_reser/$1');
-$routes->get('/admin/export_schedule', 'Admin::export_schedule');
-
 /*
  * --------------------------------------------------------------------
  * Additional Routing

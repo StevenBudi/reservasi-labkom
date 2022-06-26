@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Member;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use App\Models\MemberLog;
@@ -13,6 +14,7 @@ class Admin extends BaseController
     {
         $this->memberLogModel = new MemberLog();
         $this->reservasi = new ReservasiLabkom();
+        $this->memberModel = new Member();
     }
     public function index()
     {
@@ -20,6 +22,15 @@ class Admin extends BaseController
             'path' => 'admin'
         ];
         return view('/admin/index.php', $data);
+    }
+
+    public function user_manager(){
+        $data = [
+            'path' => 'user_manage',
+            'list' => $this->memberModel->findAll()
+        ];
+
+        return view('/admin/manage.php', $data);
     }
 
     public function member_log()

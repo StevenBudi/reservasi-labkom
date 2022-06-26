@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 <?php
 // Fetch user data then check if session id match with user id
-if (isset($_COOKIE['logged_in']) && session()->get('id') == $item['id']) {
+if (isset($_COOKIE['logged_in']) && session()->get('id') == $item['id'] || session()->get('status') == 'admin') {
 
 
 ?>
