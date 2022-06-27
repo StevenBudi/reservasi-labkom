@@ -20,6 +20,7 @@
                 </a>
                 <a href="<?= base_url('/admin/user_management') ?>" class="list-group-item list-group-item-action py-2 bg-transparent <?= isset($path) && $path == 'user_manage' ? 'active' : '' ?>" aria-current="true">
                     <i class="fas fa-users fa-fw me-3"></i><span>User Management</span>
+                </a>
                 <?php
             }
                 ?>

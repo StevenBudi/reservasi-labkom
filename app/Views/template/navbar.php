@@ -50,7 +50,7 @@
             ?>
             <ul class="navbar-nav ms-auto d-flex flex-row">
                 <li class="nav-item">
-                    <a type="button" class="btn btn-outline-primary mx-1" href="/user/sign-up" role="button">Sign Up</a>
+                    <a type="button" class="btn btn-outline-info mx-1" href="/user/sign-up" role="button">Sign Up</a>
                 </li>
                 <li class="nav-item">
                     <a type="button" class="btn btn-outline-light mx-1" href="/user/sign-in" role="button">Sign In</a>

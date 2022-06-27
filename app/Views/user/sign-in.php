@@ -4,8 +4,17 @@
 <?php
 if (!isset($_COOKIE['logged_in'])) {
 ?>
-    <form method="post" action="/user/auth" enctype="multipart/form-data" id="form">
+<section class="card" >
+  <div class="container py-5 h-100">
+    <div class="row d-flex align-items-center justify-content-center h-100">
+      <div class="col-md-8 col-lg-7 col-xl-6">
+       <img src="<?= base_url('images/log1.svg')?>"
+          class="img-fluid">
+      </div>
+      <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+        <form method="post" action="/user/auth" enctype="multipart/form-data" id="form">
         <?= csrf_field() ?>
+        <h5 class="text-center"><strong>Sign In</strong></h5>
         <div class="mb-3">
             <label for="email" class="form-label">Email address</label>
             <input type="email" class="form-control" id="email" name="email">
@@ -18,8 +27,12 @@ if (!isset($_COOKIE['logged_in'])) {
             <input type="checkbox" class="form-check-input" id="check" name="check">
             <label class="form-check-label" for="check">Remember Me!</label>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-block btn-primary">Submit</button>
     </form>
+      </div>
+    </div>
+  </div>
+</div>
 <?php
 } else {
 ?>

@@ -3,7 +3,19 @@
 <?= $this->section('content') ?>
 <form id="form" action="/user/insertAjax" method="post" enctype="multipart/form-data">
     <?= csrf_field() ?>
-    <div class="row mb-3">
+<div class="card">
+<div class="container py-5 h-100">
+    <div class="row d-flex align-items-center justify-content-center h-100">
+      <div class="col-md-8 col-lg-7 col-xl-6">
+      <img src="<?= base_url('images/log2.jpg')?>"
+          class="img-fluid">
+      </div>
+      <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+      <h5 class="text-center"><strong>Sign Up</strong></h5>
+
+        <form>
+          <!-- Email input -->
+          <div class="row mb-3">
         <div class="col">
             <label for="namadepan" class="form-label">Nama Depan</label>
             <input type="text" class="form-control" id="namadepan" name="namadepan">
@@ -49,6 +61,11 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
 </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 <script>
     $(document).ready(function() {
         $('#form').submit(function(e) {

@@ -21,8 +21,8 @@
                     <td><img src="/images/avatar/<?= $item['avatar']?>" alt="profil" width="100px"></td>
                     <td><?= $item['nama']?></td>
                     <td>
-                        <a href="/user/<?= $item['id']?>" class="btn btn-primary"><i class="fas fa-pencil-alt" ></i></a>
-                        <a href="/user/delete/<?= $item['id']?>" onclick="deleteReser(<?= $item['id'] ?>)" class="btn btn-danger"><i class="fa fa-times" ></i></a>
+                        <a href="/user/<?= $item['id']?>" class="btn btn-outline-success btn-circle"><i class="fas fa-pencil-alt" ></i></a>
+                        <a href="/user/delete/<?= $item['id']?>" onclick="deleteReser(<?= $item['id'] ?>)" class="btn btn-outline-danger btn-circle"><i class="fa fa-times" ></i></a>
                     </td>
                 </tr>
                 <?php
