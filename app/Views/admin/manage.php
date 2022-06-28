@@ -22,7 +22,7 @@
                     <td><?= $item['nama']?></td>
                     <td>
                         <a href="/user/<?= $item['id']?>" class="btn btn-outline-success btn-circle"><i class="fas fa-pencil-alt" ></i></a>
-                        <button href="/user/delete/<?= $item['id']?>" onclick="deleteUser(<?= $item['id'] ?>)" class="btn btn-outline-danger btn-circle"><i class="fa fa-times" ></i></button>
+                        <button onclick="deleteUser(<?= $item['id'] ?>)" class="btn btn-outline-danger btn-circle"><i class="fa fa-times" ></i></button>
                     </td>
                 </tr>
                 <?php
