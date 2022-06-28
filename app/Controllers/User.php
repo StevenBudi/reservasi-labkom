@@ -214,25 +214,21 @@ class User extends BaseController
     // Delete User
     public function delete($id)
     {
-        if ($this->request->isAJAX()) {
-            $logData = [
-                'user_id' => $id,
-                'action' => 'delete',
-                'ip' => strval($_SERVER['REMOTE_ADDR'])
-            ];
-            $this->memberLogModel->save($logData);
-            $this->memberModel->delete($id);
-            $result = [
-                'sukses' => 'Data Berhasil Dihapus'
-            ];
-            session()->destroy();
-            delete_cookie('logged_in');
-            delete_cookie('avatar');
-            delete_cookie('status');
-            return $this->response->setJSON($result);
-        } else {
-            exit("Data gagal dihapus");
-        }
+        $logData = [
+            'user_id' => $id,
+            'action' => 'delete',
+            'ip' => strval($_SERVER['REMOTE_ADDR'])
+        ];
+        $this->memberLogModel->save($logData);
+        $this->memberModel->delete($id);
+        $result = [
+            'sukses' => 'Data Berhasil Dihapus'
+        ];
+        session()->destroy();
+        delete_cookie('logged_in');
+        delete_cookie('avatar');
+        delete_cookie('status');
+        return $this->response->setJSON($result);
     }
 
     // Update User

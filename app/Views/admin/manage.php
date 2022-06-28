@@ -22,7 +22,7 @@
                     <td><?= $item['nama']?></td>
                     <td>
                         <a href="/user/<?= $item['id']?>" class="btn btn-outline-success btn-circle"><i class="fas fa-pencil-alt" ></i></a>
-                        <a href="/user/delete/<?= $item['id']?>" onclick="deleteReser(<?= $item['id'] ?>)" class="btn btn-outline-danger btn-circle"><i class="fa fa-times" ></i></a>
+                        <button href="/user/delete/<?= $item['id']?>" onclick="deleteUser(<?= $item['id'] ?>)" class="btn btn-outline-danger btn-circle"><i class="fa fa-times" ></i></button>
                     </td>
                 </tr>
                 <?php
@@ -37,9 +37,9 @@
         $("#user-table").DataTable();
     })
 
-    function deleteReser(id) {
+    function deleteUser(id) {
         $.ajax({
-            url: "labkom/delete_reser/".concat(id.toString()),
+            url: "/user/delete/".concat(id.toString()),
             dataType: "json",
             success: function(response) {
                 Swal.fire({
@@ -47,7 +47,7 @@
                     title: 'Success !',
                     text: response.sukses
                 });
-                jadwalLabkom();
+                window.location = window.location;
             }
         });
     }
