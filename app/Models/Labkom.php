@@ -14,7 +14,7 @@ class Labkom extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['pc', 'meja', 'kursi', 'papan tulis', 'board marker', 'penghapus', 'kabel VGA'];
+    protected $allowedFields    = ['pc', 'meja', 'kursi', 'papan_tulis', 'board marker', 'penghapus', 'kabel_VGA'];
 
     // Dates
     protected $useTimestamps = false;
