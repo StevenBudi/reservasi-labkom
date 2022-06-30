@@ -56,9 +56,16 @@
         <a href="<?= base_url('/admin/export_schedule')?>" class="btn btn-outline-primary mb-2">Download Data</a>
         <?php
     }
+
+    if (isset($_COOKIE['logged_in'])) {
+        ?>
+        
+            <a href="#" class="btn <?= isset($_COOKIE['verif']) && $_COOKIE['verif'] == 1 ? "btn-outline-success mb-2" : "disabled" ?>" id="reser-button" data-target="reservation-modal" data-toggle="modal">Pesan Labkom</a>
+            <div id="reser-data" style="display: none;"></div>
+            <div id="reser-update" style="display: none;"></div>
+        <?php
+        }
 ?>
-
-
 
 <script>
     function deleteReser(id) {
