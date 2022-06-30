@@ -98,8 +98,7 @@ class Labkom extends BaseController
             'catatan' => $this->request->getVar('reser-notes')
         ];
         $db = db_connect();
-        $query = $db->query('SELECT * FROM reservasi_labkom WHERE (`labkom` = \'' . $this->request->getVar('labkom-opt') . '\' AND `status` = \'unfinished\') AND (`waktu_penggunaan` >= \'' . $waktu_pinjam . '\' OR `waktu_akhir_penggunaan` <= \'' . $waktu_selesai . '\')');
-        print_r($query->getResult());
+        $query = $db->query('SELECT * FROM reservasi_labkom WHERE (`labkom` = \'' . $this->request->getVar('labkom-opt') . '\' AND `status` = \'unfinished\') AND (`waktu_penggunaan` <= \'' . $waktu_selesai . '\' AND `waktu_akhir_penggunaan` >= \'' . $waktu_pinjam . '\')');
         if (count($query->getResult()) == 0) {
             $this->reservasi->save($input);
             $pesan = [
@@ -158,8 +157,8 @@ class Labkom extends BaseController
             'catatan' => $this->request->getVar('reser-notes')
         ];
         $db = db_connect();
-        $query = $db->query('SELECT * FROM reservasi_labkom WHERE (`labkom` = \'' . $this->request->getVar('labkom-opt') . '\' AND `status` = \'unfinished\') AND (`waktu_penggunaan` >= \'' . $waktu_pinjam . '\' OR `waktu_akhir_penggunaan` <= \'' . $waktu_selesai . '\')');
-        if (count($query->getResult()) == 1) {
+        $query = $db->query('SELECT * FROM reservasi_labkom WHERE (`labkom` = \'' . $this->request->getVar('labkom-opt') . '\' AND `status` = \'unfinished\') AND (`waktu_penggunaan` <= \'' . $waktu_selesai . '\' AND `waktu_akhir_penggunaan` >= \'' . $waktu_pinjam . '\')');
+        if ($query->getResultArray()[0]['id'] == $id) {
             $this->reservasi->save($input);
             $pesan = [
                 'sukses' => 'Data berhasil diupdate'
