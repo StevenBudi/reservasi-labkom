@@ -5,7 +5,7 @@
     <div class="card-header ">
         <h5 class="text-center"><strong>Managemnent Data User </strong></h5>
     </div>
-<table class="table" id="user-table">
+<table class="table table-striped" id="user-table">
     <thead>
         <tr>
             <th>No</th>

@@ -1,4 +1,4 @@
-<table id="usertable" class="table">
+<table id="usertable" class="table table-striped">
     <thead>
         <tr>
             <th>No</th>
