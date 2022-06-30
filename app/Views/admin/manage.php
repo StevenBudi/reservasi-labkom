@@ -1,7 +1,10 @@
 <?= $this->extend('template/layout') ?>
 
 <?= $this->section('content') ?>
-<h1>User Management</h1>
+<div class="card data shadow ">
+    <div class="card-header ">
+        <h5 class="text-center"><strong>Managemnent Data User </strong></h5>
+    </div>
 <table class="table" id="user-table">
     <thead>
         <tr>
@@ -32,6 +35,8 @@
         ?>
     </tbody>
 </table>
+       
+</div>
 <script>
     $(document).ready(() => {
         $("#user-table").DataTable();

@@ -22,40 +22,39 @@ if (session()->get('status') == "admin") {
 <div class="card-header ">
         <h5 class="text-center"><strong>Management Data Fasilitas Laboratorium</strong></h5>
     </div>
-<div class="row mb-2 mt-2">
-    <div class="col-2">
-      Laboratorium
-    </div>
-    <div class="col-8">
-    Software Engineering
-    </div>
-    <div class="col-2">
-    <button class="btn btn-outline-success btn-circle" id="facility-button-1" data-target="facility-modal" data-toggle="modal" ><i class="fas fa-pencil-alt" ></i></button>
-    </div>
-  </div>
-<div class="row mb-2 mt-2">
-    <div class="col-2">
-      Laboratorium
-    </div>
-    <div class="col-8">
-    Multimedia Studio
-    </div>
-    <div class="col-2">
-    <button class="btn btn-outline-success btn-circle" id="facility-button-2" data-target="facility-modal" data-toggle="modal" ><i class="fas fa-pencil-alt" ></i></button>
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card bg-info text-white">
+      <div class="card-body">
+        <h5 class="card-title">Software Engineering</h5>
+        <p class="card-text">Ini adalah ruangan Software Engineering</p>
+        <button class="btn btn-outline-dark btn-circle" id="facility-button-1" data-target="facility-modal" data-toggle="modal" ><i class="fas fa-pencil-alt" ></i></button>
+      </div>
     </div>
   </div>
-<div class="row mb-2 mt-2">
-    <div class="col-2">
-      Laboratorium
-    </div>
-    <div class="col-8">
-    Computer Network and Instrumentation
-    </div>
-    <div class="col-2">
-    <button class="btn btn-outline-success btn-circle " id="facility-button-3" data-target="facility-modal" data-toggle="modal" ><i class="fas fa-pencil-alt" ></i></button>
+  <div class="col-sm-6">
+    <div class="card bg-success text-white">
+     <div class="card-body">
+        <h5 class="card-title">Multimedia Studio</h5>
+        <p class="card-text">Ini adalah Multimedia Studio</p>
+        <button class="btn btn-outline-dark btn-circle" id="facility-button-2" data-target="facility-modal" data-toggle="modal" ><i class="fas fa-pencil-alt" ></i></button>
+      </div>
     </div>
   </div>
 </div>
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card bg-danger text-white">
+      <div class="card-body">
+        <h5 class="card-title">Computer Network and Instrumentation</h5>
+        <p class="card-text">Ini adalah ruangan Computer Network and Instrumentation.</p>
+        <button class="btn btn-outline-dark btn-circle " id="facility-button-3" data-target="facility-modal" data-toggle="modal" ><i class="fas fa-pencil-alt" ></i></button>
+      </div>
+    </div>
+  </div>
+<div>
 <div>
        <div id="facility-edit" style="display: hidden;"></div>
 </div>
