@@ -215,7 +215,7 @@ class User extends BaseController
     public function delete($id)
     {
         $logData = [
-            'user_id' => $id,
+            'user_id' => session()->get('id'),
             'action' => 'delete',
             'ip' => strval($_SERVER['REMOTE_ADDR'])
         ];
@@ -224,10 +224,12 @@ class User extends BaseController
         $result = [
             'sukses' => 'Data Berhasil Dihapus'
         ];
-        session()->destroy();
-        delete_cookie('logged_in');
-        delete_cookie('avatar');
-        delete_cookie('status');
+        if (session()->get('id') == $id) {
+            session()->destroy();
+            delete_cookie('logged_in');
+            delete_cookie('avatar');
+            delete_cookie('status');
+        }
         return $this->response->setJSON($result);
     }
 
@@ -262,7 +264,7 @@ class User extends BaseController
 
         $this->memberModel->save($input);
         $logData = [
-            'user_id' => $id,
+            'user_id' => session()->get('id'),
             'action' => 'update',
             'ip' => strval($_SERVER['REMOTE_ADDR'])
         ];
@@ -292,7 +294,7 @@ class User extends BaseController
     {
         // update verif column to 1
         $input = [
-            'id' => $id,
+            'id' => session()->get('id'),
             'verif' => 1,
         ];
 
